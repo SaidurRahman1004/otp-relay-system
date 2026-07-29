@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OTP Relay</string>
+    <string name="splash_app_name">OTP Relay</string>
+    
+    <!-- Onboarding -->
+    <string name="onboarding_title">Welcome to OTP Relay</string>
+    <string name="onboarding_description">Reliably forward SMS OTPs to your backend.</string>
+    <string name="onboarding_get_started">Get Started</string>
+    
+    <!-- Dashboard -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="dashboard_title">Dashboard</string>
+    <string name="dashboard_status_sms_receiver">SMS Receiver</string>
+    <string name="dashboard_status_backend">Backend</string>
+    <string name="dashboard_status_local_queue">Local Queue</string>
+    <string name="dashboard_value_not_configured">Not configured</string>
+    <string name="dashboard_value_not_connected">Not connected</string>
+    <string name="dashboard_value_ready">Ready</string>
+    <string name="dashboard_latest_otp_title">Latest Relayed OTP</string>
+    <string name="dashboard_demo_sender">Sender: FakeDemoSender</string>
+    <string name="dashboard_otp_prefix">OTP: %1$s</string>
+    <string name="dashboard_demo_otp_masked">*** (Masked)</string>
+    
+    <!-- History -->
+    <string name="nav_history">History</string>
+    <string name="history_title">History</string>
+    <string name="history_description">List of relayed OTPs will appear here.</string>
+    
+    <!-- Diagnostics -->
+    <string name="nav_diagnostics">Diagnostics</string>
+    <string name="diagnostics_title">Diagnostics</string>
+    <string name="diagnostics_description">System health and logs will be shown here.</string>
+    
+    <!-- Settings -->
+    <string name="nav_settings">Settings</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_description">Backend URL, Device ID, and Auth settings.</string>
+    
+    <!-- SMS Configuration -->
+    <string name="sms_config_title">SMS Configuration</string>
+    <string name="sms_config_description">Configure target senders here (Coming soon).</string>
+</resources>

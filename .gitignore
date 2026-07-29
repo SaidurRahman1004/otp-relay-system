@@ -60,3 +60,44 @@ docker-compose.override.yml
 
 # Custom
 otp_relay_backend/verify_api.py
+
+# Android / Kotlin
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+.cxx/
+
+# Build generated files
+build/
+app/build/
+otp_relay_android/build/
+otp_relay_android/app/build/
+*/build/
+
+# IDE files
+.idea/
+.vscode/
+
+# Kotlin
+*.ksp/
+.kotlin/
+.kotlin_module
+
+# Keystore files
+*.jks
+*.keystore
+*.p12
+*.key
+*.alias
