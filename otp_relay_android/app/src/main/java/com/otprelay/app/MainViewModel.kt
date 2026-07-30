@@ -3,7 +3,7 @@ package com.otprelay.app
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.otprelay.app.core.storage.PreferencesManager
-import com.otprelay.app.navigation.Route
+import com.otprelay.app.navigation.MainRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,19 +22,13 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val isOnboardingCompleted = preferencesManager.onboardingCompleted.first()
-            _startDestination.value = if (isOnboardingCompleted) {
-                Route.MAIN
+            val url = preferencesManager.backendBaseUrl.first()
+            _startDestination.value = if (url.isNullOrBlank()) {
+                MainRoute.SETTINGS
             } else {
-                Route.ONBOARDING
+                MainRoute.DASHBOARD
             }
         }
     }
-    
-    fun completeOnboarding() {
-        viewModelScope.launch {
-            preferencesManager.setOnboardingCompleted(true)
-            _startDestination.value = Route.MAIN
-        }
-    }
 }
+

@@ -18,10 +18,18 @@ class SettingsViewModel @Inject constructor(
     private val _allowedSenders = MutableStateFlow<Set<String>>(emptySet())
     val allowedSenders: StateFlow<Set<String>> = _allowedSenders.asStateFlow()
 
+    private val _backendBaseUrl = MutableStateFlow("")
+    val backendBaseUrl: StateFlow<String> = _backendBaseUrl.asStateFlow()
+
     init {
         viewModelScope.launch {
             preferencesManager.allowedSenders.collect { senders ->
                 _allowedSenders.value = senders
+            }
+        }
+        viewModelScope.launch {
+            preferencesManager.backendBaseUrl.collect { url ->
+                _backendBaseUrl.value = url ?: ""
             }
         }
     }
@@ -42,10 +50,10 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun reprovisionDevice() {
+    fun setBackendBaseUrl(url: String) {
         viewModelScope.launch {
-            preferencesManager.setDeviceToken("")
-            preferencesManager.setOnboardingCompleted(false)
+            preferencesManager.setBackendBaseUrl(url)
         }
     }
 }
+

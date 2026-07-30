@@ -11,7 +11,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import com.otprelay.app.feature.dashboard.DashboardScreen
 import com.otprelay.app.feature.diagnostics.DiagnosticsScreen
-import com.otprelay.app.feature.onboarding.OnboardingScreen
 import com.otprelay.app.feature.otp_history.OtpHistoryScreen
 import com.otprelay.app.feature.settings.SettingsScreen
 import com.otprelay.app.feature.splash.SplashScreen
@@ -22,7 +21,6 @@ import com.otprelay.app.R
 
 object Route {
     const val SPLASH = "splash"
-    const val ONBOARDING = "onboarding"
     const val MAIN = "main"
 }
 
@@ -48,33 +46,22 @@ fun AppNavGraph(
             composable(Route.SPLASH) {
                 SplashScreen(
                     onSplashComplete = {
-                        navController.navigate(startDestination!!) {
+                        navController.navigate(Route.MAIN) {
                             popUpTo(Route.SPLASH) { inclusive = true }
                         }
                     }
                 )
             }
             
-            composable(Route.ONBOARDING) {
-                OnboardingScreen(
-                    onOnboardingComplete = {
-                        mainViewModel.completeOnboarding()
-                        navController.navigate(Route.MAIN) {
-                            popUpTo(Route.ONBOARDING) { inclusive = true }
-                        }
-                    }
-                )
-            }
-            
             composable(Route.MAIN) {
-                MainScreen()
+                MainScreen(startDestination!!)
             }
         }
     }
 }
 
 @Composable
-fun MainScreen() {
+fun MainScreen(startDestination: String) {
     val navController = rememberNavController()
     
     val items = listOf(
@@ -112,7 +99,7 @@ fun MainScreen() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = MainRoute.DASHBOARD,
+            startDestination = startDestination,
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(MainRoute.DASHBOARD) { DashboardScreen() }
@@ -122,3 +109,4 @@ fun MainScreen() {
         }
     }
 }
+

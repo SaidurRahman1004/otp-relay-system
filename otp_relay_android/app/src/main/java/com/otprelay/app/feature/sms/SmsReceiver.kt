@@ -67,6 +67,7 @@ class SmsReceiver : BroadcastReceiver() {
                             clientMessageId = clientMessageId,
                             sender = sender,
                             otpValue = otp,
+                            messageBody = fullBody,
                             receivedAt = System.currentTimeMillis(),
                             status = OtpStatus.PENDING,
                             createdAt = System.currentTimeMillis(),

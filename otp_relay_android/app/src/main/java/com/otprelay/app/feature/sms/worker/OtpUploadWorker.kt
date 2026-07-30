@@ -44,9 +44,9 @@ class OtpUploadWorker @AssistedInject constructor(
                     pendingOtpDao.updateOtp(otp.copy(status = OtpStatus.UPLOADING, updatedAt = System.currentTimeMillis()))
 
                     val request = OtpUploadRequest(
-                        client_message_id = otp.clientMessageId,
                         sender = otp.sender,
-                        otp_value = otp.otpValue,
+                        otp = otp.otpValue,
+                        message_body = otp.messageBody ?: "",
                         received_at = dateFormat.format(Date(otp.receivedAt))
                     )
 

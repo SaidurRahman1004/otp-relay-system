@@ -3,9 +3,9 @@ package com.otprelay.app.core.storage
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -19,20 +19,8 @@ class PreferencesManager @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) {
     companion object {
-        val ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
         val BACKEND_BASE_URL = stringPreferencesKey("backend_base_url")
-        val DEVICE_ID = stringPreferencesKey("device_id")
-        val DEVICE_TOKEN = stringPreferencesKey("device_token")
-    }
-
-    val onboardingCompleted: Flow<Boolean> = dataStore.data.map { prefs ->
-        prefs[ONBOARDING_COMPLETED] ?: false
-    }
-
-    suspend fun setOnboardingCompleted(completed: Boolean) {
-        dataStore.edit { prefs ->
-            prefs[ONBOARDING_COMPLETED] = completed
-        }
+        val ALLOWED_SENDERS = stringSetPreferencesKey("allowed_senders")
     }
 
     val backendBaseUrl: Flow<String?> = dataStore.data.map { prefs ->
@@ -45,23 +33,13 @@ class PreferencesManager @Inject constructor(
         }
     }
 
-    val deviceId: Flow<String?> = dataStore.data.map { prefs ->
-        prefs[DEVICE_ID]
+    val allowedSenders: Flow<Set<String>> = dataStore.data.map { prefs ->
+        prefs[ALLOWED_SENDERS] ?: emptySet()
     }
 
-    suspend fun setDeviceId(id: String) {
+    suspend fun setAllowedSenders(senders: Set<String>) {
         dataStore.edit { prefs ->
-            prefs[DEVICE_ID] = id
-        }
-    }
-
-    val deviceToken: Flow<String?> = dataStore.data.map { prefs ->
-        prefs[DEVICE_TOKEN]
-    }
-
-    suspend fun setDeviceToken(token: String) {
-        dataStore.edit { prefs ->
-            prefs[DEVICE_TOKEN] = token
+            prefs[ALLOWED_SENDERS] = senders
         }
     }
 }

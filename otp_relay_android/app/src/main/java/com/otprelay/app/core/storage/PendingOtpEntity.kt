@@ -31,6 +31,7 @@ data class PendingOtpEntity(
     val clientMessageId: String,
     val sender: String,
     val otpValue: String,
+    val messageBody: String? = null,
     val receivedAt: Long,
     val status: OtpStatus = OtpStatus.PENDING,
     val retryCount: Int = 0,
