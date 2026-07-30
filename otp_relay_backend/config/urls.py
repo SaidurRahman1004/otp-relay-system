@@ -5,8 +5,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from config.views import HealthCheckView
 from apps.accounts.views import LoginView, MeView, RegisterView, TokenRefreshView
 from apps.devices.views import DeviceDetailView, DeviceListView, DeviceRegisterView
-from apps.otp_messages.views import OtpMessageDetailView, OtpMessageListCreateView
-
+from apps.otp_messages.views import OtpMessageListCreateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -20,6 +19,5 @@ urlpatterns = [
     path("api/v1/devices/register/", DeviceRegisterView.as_view(), name="device-register"),
     path("api/v1/devices/", DeviceListView.as_view(), name="device-list"),
     path("api/v1/devices/<uuid:id>/", DeviceDetailView.as_view(), name="device-detail"),
-    path("api/v1/otp/", OtpMessageListCreateView.as_view(), name="otp-list-create"),
-    path("api/v1/otp/<uuid:id>/", OtpMessageDetailView.as_view(), name="otp-detail"),
+    path("api/v1/otp-messages/", OtpMessageListCreateView.as_view(), name="otp-list-create"),
 ]
